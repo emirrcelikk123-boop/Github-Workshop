@@ -1,19 +1,21 @@
-﻿namespace Problem4_2516013014
+﻿using System;
+using System.Collections.Generic;
+
+namespace CSharpHomework
 {
-    internal class Program
+    public class Problem4
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Dizi İşlemleri Programı");
             int[] sayilar = { 5, 12, 7, 3, 9, 14, 6, 8, 10, 2, 7 };
-            Console.WriteLine("Dizi Elemanları: " + string.Join(", ", sayilar));
-            Console.WriteLine("Dizi Toplamı: " + DiziToplami(sayilar));
-            Console.WriteLine("Dizi Ortalaması: " + DiziOrtalamasi(sayilar));
-            Console.WriteLine("En Büyük Sayı: " + EnBuyukBul(sayilar));
-            Console.WriteLine("En Küçük Sayı: " + EnKucukBul(sayilar));
-            Console.WriteLine("Çift Sayılar: " + string.Join(", ", CiftSayilariFiltrele(sayilar)));
-            int arananSayi = 7;
-            Console.WriteLine($"Dizide {arananSayi} sayısının tekrar sayısı: " + SayiTekrarSay(sayilar, arananSayi));
+
+            Console.WriteLine(DiziToplami(sayilar));
+            Console.WriteLine(DiziOrtalamasi(sayilar));
+            Console.WriteLine(EnBuyukBul(sayilar));
+            Console.WriteLine(EnKucukBul(sayilar));
+            Console.WriteLine(string.Join(", ", CiftSayilariFiltrele(sayilar)));
+            Console.WriteLine(SayiTekrarSay(sayilar, 7));
+            Console.ReadLine();
         }
 
         public static int DiziToplami(int[] dizi)
@@ -26,14 +28,18 @@
             return toplam;
         }
 
-        public static int DiziOrtalamasi(int[] dizi)
+        public static double DiziOrtalamasi(int[] dizi)
         {
-            int toplam = DiziToplami(dizi);
+            if (dizi.Length == 0) return 0;
+
+            double toplam = DiziToplami(dizi);
             return toplam / dizi.Length;
         }
 
         public static int EnBuyukBul(int[] dizi)
         {
+            if (dizi.Length == 0) return 0;
+
             int enBuyuk = dizi[0];
             foreach (int sayi in dizi)
             {
@@ -47,6 +53,8 @@
 
         public static int EnKucukBul(int[] dizi)
         {
+            if (dizi.Length == 0) return 0;
+
             int enKucuk = dizi[0];
             foreach (int sayi in dizi)
             {
@@ -82,7 +90,6 @@
                 }
             }
             return tekrarSayisi;
-
         }
     }
 }

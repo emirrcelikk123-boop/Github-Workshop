@@ -1,53 +1,84 @@
-﻿namespace Problem2_2516013014
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-           Console.WriteLine(GunAdiGetir(3)); // Çarşamba
-           Console.WriteLine(ArtikYilMi(2020)); // True
-           Console.WriteLine(AyniGunSayisi(2, 2021)); // 28
-           Console.WriteLine(HaftaIcıSonuMu(6)); // Hafta sonu
+﻿using System;
 
+namespace CSharpHomework
+{
+    public class Problem2
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine(GunAdiGetir(1));
+            Console.WriteLine(ArtikYilMi(2024));
+            Console.WriteLine(AyinGunSayisi(2, 2024));
+            Console.WriteLine(HaftaIciSonuMu(6));
+            Console.ReadLine();
         }
 
-       public static string GunAdiGetir(int gunNumarasi)
+        public static string GunAdiGetir(int gunNumarasi)
         {
-            return gunNumarasi switch
+            switch (gunNumarasi)
             {
-                1 => "Pazartesi",
-                2 => "Salı",
-                3 => "Çarşamba",
-                4 => "Perşembe",
-                5 => "Cuma",
-                6 => "Cumartesi",
-                7 => "Pazar",
-                _ => "Geçersiz gün"
-            };
+                case 1:
+                    return "Pazartesi";
+                case 2:
+                    return "Salı";
+                case 3:
+                    return "Çarşamba";
+                case 4:
+                    return "Perşembe";
+                case 5:
+                    return "Cuma";
+                case 6:
+                    return "Cumartesi";
+                case 7:
+                    return "Pazar";
+                default:
+                    return "Geçersiz gün";
+            }
         }
 
         public static bool ArtikYilMi(int yil)
         {
-            return yil % 4 == 0 && (yil % 100 != 0 || yil % 400 == 0);
+            if (yil % 400 == 0)
+                return true;
+            if (yil % 100 == 0)
+                return false;
+            if (yil % 4 == 0)
+                return true;
+
+            return false;
         }
 
-        public static int AyniGunSayisi(int ay, int yıl) {             
-            return ay switch
-            {
-                1 or 3 or 5 or 7 or 8 or 10 or 12 => 31,
-                4 or 6 or 9 or 11 => 30,
-                2 => ArtikYilMi(yıl) ? 29 : 28,
-                _ => 0
-            };
-        }
-
-        public static string HaftaIcıSonuMu(int gunNumarasi)
+        public static int AyinGunSayisi(int ay, int yil)
         {
-            string sonuc = (gunNumarasi >= 1 && gunNumarasi <= 5) ? "Hafta içi" :
-               (gunNumarasi == 6 || gunNumarasi == 7) ? "Hafta sonu" :
-               "Geçersiz gün";
+            switch (ay)
+            {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    return 31;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 30;
+                case 2:
+                    if (ArtikYilMi(yil))
+                        return 29;
+                    else
+                        return 28;
+                default:
+                    return 0;
+            }
+        }
 
-            return sonuc;
+        public static string HaftaIciSonuMu(int gunNumarasi)
+        {
+            return (gunNumarasi >= 1 && gunNumarasi <= 5) ? "Hafta İçi" :
+                   (gunNumarasi == 6 || gunNumarasi == 7) ? "Hafta Sonu" : "Geçersiz gün";
         }
     }
 }

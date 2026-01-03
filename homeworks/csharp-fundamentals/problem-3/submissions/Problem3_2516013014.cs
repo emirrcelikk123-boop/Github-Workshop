@@ -1,36 +1,26 @@
-﻿namespace Problem3_2516013014
+﻿using System;
+using System.Collections.Generic;
+
+namespace CSharpHomework
 {
-    internal class Program
+    public class Problem3
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Faktoriyel Hesabı için Sayı Gir");
-            int n = Convert.ToInt32(Console.ReadLine());
-            long faktoriyelSonuc = Faktoriyel(n);
-            Console.WriteLine($"{n}! = {faktoriyelSonuc}");
-            Console.WriteLine("Fibonacci Serisi için Sayı Gir");
-            int adet = Convert.ToInt32(Console.ReadLine());
-            List<int> fibonacciSerisi = FibonacciSerisi(adet);
-            Console.WriteLine($"Fibonacci Serisi ({adet} adet): {string.Join(", ", fibonacciSerisi)}");
-            Console.WriteLine("Basamak Sayısı için Sayı Gir");
-            int sayi = Convert.ToInt32(Console.ReadLine());
-            int basamakSayisi = BasamakSayisi(sayi);
-            Console.WriteLine($"{sayi} sayısının basamak sayısı: {basamakSayisi}");
-            Console.WriteLine("Asal Sayı Kontrolü için Sayı Gir");
-            int asalSayi = Convert.ToInt32(Console.ReadLine());
-            bool asalMi = AsalMi(asalSayi);
-            Console.WriteLine(asalMi ? $"{asalSayi} bir asal sayıdır." : $"{asalSayi} bir asal sayı değildir.");
-            Console.WriteLine("1'den N'e Kadar Olan Sayıların Toplamı için N Gir");
-            int m = Convert.ToInt32(Console.ReadLine());
-            int toplam = SayilarinToplami(m);
-            Console.WriteLine($"1'den {m}'e kadar olan sayıların toplamı: {toplam}");
-            
+            // Test etmek istersen burayı kullanabilirsin
+            Console.WriteLine(Faktoriyel(5));
+            Console.WriteLine(string.Join(", ", FibonacciSerisi(5)));
+            Console.WriteLine(BasamakSayisi(12345));
+            Console.WriteLine(AsalMi(17));
+            Console.WriteLine(SayilarinToplami(10));
+            Console.ReadLine();
         }
 
         public static long Faktoriyel(int n)
         {
-            if (n < 0)
-                Console.WriteLine("Negatif sayilarin faktoriyeli hesaplanamaz.");
+            if (n < 0) return 0;
+            if (n == 0 || n == 1) return 1;
+
             long sonuc = 1;
             for (int i = 2; i <= n; i++)
             {
@@ -43,39 +33,33 @@
         {
             List<int> fibonacci = new List<int>();
 
-            // Negatif veya 0 girilirse boş liste dön
-            if (adet <= 0)
-                return fibonacci;
+            if (adet <= 0) return fibonacci;
 
             fibonacci.Add(0);
-
-            // Sadece 1 adet istenirse dön
-            if (adet == 1)
-                return fibonacci;
+            if (adet == 1) return fibonacci;
 
             fibonacci.Add(1);
+            if (adet == 2) return fibonacci;
 
-           
-            int i = 2; // Başlangıç değeri
-            while (i < adet)
+            for (int i = 2; i < adet; i++)
             {
                 int sonraki = fibonacci[i - 1] + fibonacci[i - 2];
                 fibonacci.Add(sonraki);
-                i++; // Artırma işlemi
             }
 
             return fibonacci;
         }
 
-        public static int BasamakSayisi(int adet) {             
-            if (adet < 0)
-                adet = -adet; // Negatif sayılar için pozitif yap
-            if (adet == 0)
-                return 1; // 0'ın basamak sayısı 1'dir
+        public static int BasamakSayisi(int sayi)
+        {
+            if (sayi == 0) return 1;
+
+            if (sayi < 0) sayi = -sayi;
+
             int basamakSayisi = 0;
-            while (adet > 0)
+            while (sayi > 0)
             {
-                adet /= 10;
+                sayi /= 10;
                 basamakSayisi++;
             }
             return basamakSayisi;
@@ -83,12 +67,11 @@
 
         public static bool AsalMi(int sayi)
         {
-            if (sayi <= 1)
-                return false;
+            if (sayi <= 1) return false;
+
             for (int i = 2; i <= Math.Sqrt(sayi); i++)
             {
-                if (sayi % i == 0)
-                    return false;
+                if (sayi % i == 0) return false;
             }
             return true;
         }
