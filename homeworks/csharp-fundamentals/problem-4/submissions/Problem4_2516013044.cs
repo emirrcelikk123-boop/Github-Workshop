@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace CSharpHomework
@@ -20,7 +20,7 @@ namespace CSharpHomework
             if (dizi == null || dizi.Length == 0)
                 return 0;
 
-            int toplam = 0;
+            double toplam = 0;
             foreach (int sayi in dizi)
             {
                 toplam += sayi;
@@ -33,7 +33,7 @@ namespace CSharpHomework
             if (dizi == null || dizi.Length == 0)
                 return 0;
 
-            int enBuyuk = 0;
+            int enBuyuk = dizi[0];
             foreach (int sayi in dizi)
             {
                 if (sayi > enBuyuk)
